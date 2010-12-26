@@ -172,7 +172,7 @@ wrap a b m = do
 
 -- | Put something as it is shown using @show@
 putShow :: Show a => a -> Put
-putShow = mapM_ put . show
+putShow = put . toBS . show
 
 -- * Get Helper functions
 
@@ -182,7 +182,7 @@ many p = many1 p `mplus` return []
 
 -- | Parse one or more items using a given parser
 many1 :: Get a -> Get [a]
-many1 p = (:) <$> p <*> many p
+many1 p = liftA2 (:) p (many p)
 
 -- | Parse a given character
 char :: Char -> Get Char
@@ -190,7 +190,7 @@ char c = do
     x <- getCharG
     if x == c
         then return c
-        else fail $ "Expected char: '" ++ c:"' got: '" ++ [x,'\'']
+        else fail $ "Expected char: '" ++ c:"' got: '" ++ x ++ "'"
 
 -- | Get a Char. Only works with single byte characters
 getCharG :: Get Char

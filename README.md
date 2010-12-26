@@ -10,11 +10,11 @@ written by some generous soul!
 Installation
 ------------
 
-Here is what I do to install haskell torrrent locally on my machine:
+Here is what I do to install Combinatorrent locally on my machine:
 
     cabal install --prefix=$HOME --user
 
-Since we are using the magnificient cabal, this is enough to install haskell
+Since we are using the magnificent cabal, this is enough to install haskell
 torrent in our $HOME/bin directory.
 
 Usage
